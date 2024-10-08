@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'reservation',
     'restaurant',
     'rest_framework',
+    'djoser',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -90,6 +92,11 @@ DATABASES = {
     }
 }
 
+# djoser settings
+DJOSER = {
+    'USER_ID_FIELD' : 'username'
+}
+
 # The settings for media files have been updated for the Graded assessment
 MEDIA_URL = '/media/'
 
@@ -130,8 +137,10 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [],
-    'DEFAULT_PERMISSION_CLASSES': [],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
 }
 
 # Default primary key field type
